@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
+<style>
+  .resizable-input {
+      border: 1px solid #ccc;
+      width:90vw;
+      padding: 5px;
+      height: auto;
+      min-height: 50px; /* Set a minimum height */
+      resize: vertical; /* Allow vertical resizing */
+      text-align:center;
+  }
+</style>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Abuse detection and Cyberbullying </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+      <li><a href="/">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+    {% if authorized %}
+      <h1>TRANSACTION SUCCESS</h1>
+    {% elif unauthorized %} 
+      <h1>Unauthorized TRANSACTION</h1> 
+    {% elif Invalid %} 
+    <h1>Invalid TRANSACTION</h1> 
+    {% elif invalid_access %} 
+    <h1>Invalid Access</h1> 
+    {% endif %}
+    {% if name %}
+        <h3>Welcome {{name}}</h3><br>
+    {% endif %}  
+    {% if error %}
+    <h3> {{error}}</h3><br>
+    {% endif %}  
+      <form action="{{url_for('prediction')}}" method="POST">
+        <input class="resizable-input" type="text" placeholder='Enter your message' name='tweet' ><br><br>
+        <input type="submit" class="btn btn-primary" value="Predict" style="width:90vw">
+      </form>
+     
+    
+</div>
+
+</body>
+</html>
